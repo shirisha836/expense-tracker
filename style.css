@@ -1,0 +1,227 @@
+/* ==========================================================================
+   XPENZA — FINAL STYLE.CSS
+   Theme: Dark Purple Neon (Accent A: #b892ff)
+   Rounded UI — Unified for Login / Signup / Dashboard / Bot
+   ========================================================================== */
+
+/* Google font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* --------------------------
+   Palette & global tokens
+   -------------------------- */
+:root{
+  --bg-1: #08040a;
+  --surface: rgba(30,24,40,0.58);
+  --card: rgba(22,16,30,0.6);
+  --glass-border: rgba(184,146,255,0.10);
+  --accent1: #b892ff; /* SELECTED ACCENT A */
+  --accent2: #7f5af0;
+  --muted: #c8c0e8;
+  --muted-2: #9f93c4;
+  --danger: #ff6b9a;
+  --success: #3ee6b6;
+  --text: #efeaff;
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --glass: rgba(255,255,255,0.03);
+  --shadow-1: 0 10px 30px rgba(127,90,240,0.12);
+}
+
+/* --------------------------
+   Global reset / layout
+   -------------------------- */
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',sans-serif}
+html,body{height:100%}
+body.bg{
+  background:
+    radial-gradient(circle at 12% 12%, rgba(184,146,255,0.06), transparent 8%),
+    radial-gradient(circle at 88% 88%, rgba(255,20,147,0.03), transparent 12%),
+    linear-gradient(180deg,#04030a,#0b0714 65%);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  padding:24px 0;
+}
+
+/* Center helpers */
+.center { display:flex; align-items:center; justify-content:center; }
+.container-center { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:28px; }
+
+/* Fancy card (glass) */
+.glass-card{
+  width:420px;
+  max-width:calc(100% - 40px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: var(--radius-lg);
+  padding:28px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-1);
+  backdrop-filter: blur(12px) saturate(120%);
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.glass-card:hover{ transform: translateY(-4px); box-shadow: 0 18px 50px rgba(127,90,240,0.16); }
+
+/* Text helpers */
+.logo-text{ font-size:28px; font-weight:700; color:var(--accent1); text-shadow:0 8px 28px rgba(184,146,255,0.08) }
+.subtitle{ color:var(--muted); font-size:13px; margin-top:6px }
+
+/* Forms & floating labels */
+.form{ margin-top:16px; display:flex; flex-direction:column; gap:14px; }
+.floating .field{ position:relative }
+.floating .field input,
+.floating .field select {
+  width:100%;
+  padding:13px 14px;
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.03);
+  color:var(--text);
+  outline:none;
+  font-size:14px;
+}
+.floating .field label{
+  position:absolute; left:14px; top:50%; transform:translateY(-50%);
+  color:var(--muted); font-size:13px; pointer-events:none; transition:.18s ease;
+}
+.floating .field input:focus + label,
+.floating .field input:not(:placeholder-shown) + label,
+.floating .field select:focus + label,
+.floating .field select:not([value=""]) + label{
+  top:6px; font-size:11px; color:var(--accent1);
+}
+
+/* Eye button */
+.eye-btn{ position:absolute; right:8px; top:50%; transform:translateY(-50%); border:none; background:transparent; color:var(--muted); cursor:pointer; padding:6px 8px; border-radius:8px; font-weight:600 }
+.eye-btn:hover{ color:var(--accent2) }
+
+/* Buttons */
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 14px; border-radius:var(--radius-md); border:none; cursor:pointer; font-weight:600; transition: transform .16s ease, box-shadow .16s ease; font-size:14px }
+.btn.primary{ background: linear-gradient(90deg,var(--accent1),var(--accent2)); color:#fff; box-shadow: 0 10px 35px rgba(127,90,240,0.14) }
+.btn.primary:hover{ transform: translateY(-3px); box-shadow:0 18px 45px rgba(127,90,240,0.22) }
+.btn.muted{ background: transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.03) }
+.btn.small{ padding:8px 10px; border-radius:var(--radius-sm); font-size:13px }
+
+/* Links & misc */
+.links{ display:flex; justify-content:space-between; margin-top:12px; font-size:14px; color:var(--muted) }
+.links a{ color:var(--accent1); text-decoration:none }
+.links a:hover{ text-decoration:underline }
+
+/* Error / success boxes */
+.error-box, .success-box {
+  margin-top:12px; padding:10px; border-radius:10px; font-size:13px; display:none;
+}
+.error-box{ background: rgba(255,90,140,0.07); color:var(--danger); border-left:3px solid rgba(255,90,140,0.22) }
+.success-box{ background: rgba(120,200,160,0.06); color:var(--success); border-left:3px solid rgba(60,200,160,0.14) }
+
+/* Modal */
+.modal-overlay{ display:none; position:fixed; inset:0; backdrop-filter: blur(10px); background: rgba(0,0,0,0.55); align-items:center; justify-content:center; }
+.modal-card{ width:320px; background: rgba(18,12,30,0.95); padding:22px; border-radius:var(--radius-lg); border:1px solid var(--glass-border); box-shadow:0 20px 60px rgba(127,90,240,0.14) }
+
+/* ===== Dashboard specific styles ===== */
+.dashboard-card{ width:980px; max-width:calc(100% - 48px); padding:18px; display:flex; flex-direction:column; gap:14px; border-radius:20px }
+.stats-row{ display:flex; gap:12px; justify-content:space-between; flex-wrap:wrap }
+.stat-card{ flex:1; min-width:160px; padding:12px 14px; border-radius:14px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); box-shadow:0 10px 30px rgba(127,90,240,0.04); border:1px solid rgba(255,255,255,0.02) }
+.stat-title{ font-size:13px; color:var(--muted) }
+.stat-value{ font-size:18px; color:var(--accent1); font-weight:700 }
+
+/* Filters */
+.filters-toggle{ display:flex; justify-content:flex-end; margin-bottom:6px }
+.filters-panel{ margin-bottom:10px; transition:all .22s ease }
+.filters-row{ display:flex; gap:8px; align-items:center; flex-wrap:wrap }
+.filters-row input, .filters-row select{ padding:9px 10px; border-radius:10px; background: rgba(255,255,255,0.03); color:var(--text); border:1px solid rgba(255,255,255,0.03) }
+
+/* Workspace layout */
+.workspace{ display:grid; grid-template-columns:1fr 420px; gap:20px; align-items:start }
+.left-panel{ min-width:260px }
+.right-panel{ width:420px }
+
+/* Quick add inputs */
+.quick-add input, .quick-add select { width:100%; padding:12px; border-radius:12px; margin-bottom:8px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.03); color:var(--text) }
+.btn-row{ display:flex; gap:10px; align-items:center }
+
+/* Expense list */
+.expense-list{ list-style:none; margin-top:12px; max-height:360px; overflow:auto; padding-right:6px }
+.expense-item{ display:flex; justify-content:space-between; align-items:center; padding:10px; border-radius:12px; margin-bottom:8px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.02) }
+.expense-item .meta{ font-size:13px; color:var(--muted) }
+
+/* Chart card */
+.chart-card{ padding:12px; border-radius:14px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); box-shadow:0 10px 30px rgba(127,90,240,0.04) }
+
+/* Budget area */
+.budget-block{ margin-top:12px }
+.budget-warning{ margin-left:8px; color:var(--danger); font-size:13px }
+
+/* Topbar */
+.topbar{ display:flex; justify-content:space-between; align-items:center; padding:12px 20px; position:fixed; left:20px; right:20px; top:12px; border-radius:14px; background: transparent; z-index:30 }
+.brand-small{ color:var(--accent1); font-weight:700; font-size:18px }
+.top-right{ display:flex; gap:10px; align-items:center }
+
+/* Small helpers */
+.section-title{ color:var(--muted); margin-bottom:10px; font-weight:600 }
+
+/* stat counter animation (JS will update numeric values) */
+.countup { transition: all .6s cubic-bezier(.2,.9,.2,1); }
+
+/* ===== Xpenza Sassy Bot (floating bubble + chat) ===== */
+#xpenza-bot{ position:fixed; right:22px; bottom:22px; z-index:9999; font-family:'Poppins',sans-serif; }
+#xpb-toggle{
+  width:70px; height:70px; border-radius:50%; border:none; cursor:pointer;
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  box-shadow:0 14px 40px rgba(127,90,240,0.18); padding:6px; display:flex; align-items:center; justify-content:center;
+}
+#xpb-toggle img{ width:100%; height:100%; object-fit:cover; border-radius:50%; border:2px solid rgba(255,255,255,0.10); }
+
+/* panel */
+#xpb-panel{
+  position: fixed; right:22px; bottom:104px; width:360px; max-width:calc(100% - 40px);
+  background: rgba(18,13,35,0.96); border-radius:16px; color:var(--text);
+  box-shadow:0 20px 60px rgba(127,90,240,0.18); border:1px solid var(--glass-border);
+  display:none; flex-direction:column; overflow:hidden; font-size:14px;
+}
+.xpb-header{ padding:12px 14px; border-bottom:1px solid rgba(255,255,255,0.03); display:flex; align-items:center; justify-content:space-between }
+.xpb-title{ font-weight:700; color:var(--accent1); font-size:15px }
+.xpb-sub{ color:var(--muted); font-size:12px; margin-top:4px }
+.xpb-icon{ background:transparent; border:none; color:var(--muted); cursor:pointer; font-size:16px }
+
+/* messages */
+.xpb-messages{ max-height:340px; overflow:auto; padding:12px; display:flex; flex-direction:column; gap:10px }
+.xpb-msg{ max-width:80%; padding:10px 12px; border-radius:12px; line-height:1.35 }
+.xpb-msg.bot{ align-self:flex-start; background:linear-gradient(180deg, rgba(184,146,255,0.06), rgba(127,90,240,0.04)); border:1px solid rgba(184,146,255,0.06); color:var(--text) }
+.xpb-msg.user{ align-self:flex-end; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.03); color:var(--text) }
+
+/* typing dots */
+.typing-dots{ display:inline-block; width:42px }
+.typing-dots span{ display:inline-block; width:8px; height:8px; margin:0 3px; background:var(--muted); border-radius:50%; opacity:0.18; animation:dot 1.0s infinite }
+.typing-dots span:nth-child(1){ animation-delay:0s } .typing-dots span:nth-child(2){ animation-delay:0.12s } .typing-dots span:nth-child(3){ animation-delay:0.24s }
+@keyframes dot{ 0%{ transform:translateY(0); opacity:0.18 } 50%{ transform:translateY(-6px); opacity:0.95 } 100%{ transform:translateY(0); opacity:0.18 } }
+
+/* form & actions inside bot */
+.xpb-form{ display:flex; gap:8px; padding:10px; border-top:1px solid rgba(255,255,255,0.02) }
+.xpb-form input{ flex:1; padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,0.04); background:rgba(255,255,255,0.03); color:var(--text) }
+.xpb-actions{ display:flex; gap:8px; padding:8px 12px 12px }
+
+/* confetti piece style */
+.xpb-confetti{ position:absolute; width:8px; height:8px; background:var(--accent1); border-radius:2px; pointer-events:none; opacity:0.95; transform:translateY(0); animation:confetti-fall 900ms linear forwards }
+@keyframes confetti-fall{ to{ transform:translateY(120px) rotate(180deg); opacity:0 } }
+
+/* ===== Utility & responsiveness ===== */
+.hidden{ display:none !important; }
+.center-col{ display:flex; flex-direction:column; align-items:flex-start; gap:8px }
+
+@media (max-width:980px){
+  .dashboard-card{ width:calc(100% - 36px); padding:16px }
+  .workspace{ grid-template-columns:1fr; }
+  #xpb-panel{ right:12px; left:12px; width:auto; bottom:96px }
+  #xpb-toggle{ width:60px; height:60px }
+}
+
+/* small tweaks for inputs / select placeholders */
+input::placeholder, select::placeholder { color: rgba(255,255,255,0.28) }
+
+/* subtle entrance animations */
+@keyframes floatUp { from{ transform: translateY(8px); opacity:0 } to{ transform: translateY(0); opacity:1 } }
+.stat-card, .expense-item, .chart-card { animation: floatUp .45s ease both }
+
+/* end of style.css */

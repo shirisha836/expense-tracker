@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xpenza — Profile</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg">
+
+  <main class="center">
+    <section class="glass-card login-card">
+      <div class="brand">
+        <div class="logo-text">✨ Xpenza — Profile</div>
+        <div class="subtitle">Manage your account</div>
+      </div>
+
+      <form id="profileForm" class="form floating">
+        <div class="field">
+          <input id="pName" type="text" required>
+          <label for="pName">Full Name</label>
+        </div>
+
+        <div class="field">
+          <input id="pEmail" type="email" required>
+          <label for="pEmail">Email</label>
+        </div>
+
+        <div class="field">
+          <input id="pPass" type="password">
+          <label for="pPass">New Password (optional)</label>
+        </div>
+
+        <button class="btn primary" type="submit">Save</button>
+      </form>
+
+      <div class="links">
+        <a href="dashboard.html">Back to Dashboard</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // load existing user
+    const logged = JSON.parse(localStorage.getItem("loggedUser") || "{}");
+
+    document.getElementById("pName").value = logged.fullName || "";
+    document.getElementById("pEmail").value = logged.email || "";
+
+    document.getElementById("profileForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const users = JSON.parse(localStorage.getItem("xpenza_users") || "[]");
+      const index = users.findIndex((u) => u.email === logged.email);
+
+      if (index === -1) {
+        alert("User not found.");
+        return;
+      }
+
+      users[index].fullName = document.getElementById("pName").value.trim();
+      users[index].email = document.getElementById("pEmail").value.trim().toLowerCase();
+
+      const newPassword = document.getElementById("pPass").value.trim();
+      if (newPassword.length > 0) {
+        users[index].password = newPassword;
+      }
+
+      localStorage.setItem("xpenza_users", JSON.stringify(users));
+      localStorage.setItem("loggedUser", JSON.stringify(users[index]));
+
+      alert("Profile updated!");
+      window.location.href = "dashboard.html";
+    });
+  </script>
+</body>
+</html>

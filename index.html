@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Xpenza — Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="bg">
+
+  <main class="center">
+    <section class="glass-card login-card">
+
+      <!-- LOGO PLACEHOLDER (add your logo later) -->
+      <!-- <img src="logo.png" class="auth-logo"> -->
+
+      <div class="brand">
+        <div class="logo-text">✨ Xpenza</div>
+        <div class="subtitle">Track smarter. Live clearer.</div>
+      </div>
+
+      <form id="loginForm" class="form floating">
+        
+        <div class="field">
+          <input id="email" type="email" required autocomplete="email">
+          <label for="email">Email</label>
+        </div>
+
+        <div class="field">
+          <input id="password" type="password" required autocomplete="current-password">
+          <label for="password">Password</label>
+          <button type="button" class="eye-btn" id="togglePass">Show</button>
+        </div>
+
+        <button type="submit" class="btn primary">Login</button>
+      </form>
+
+      <div id="loginError" class="error-box"></div>
+
+      <div class="links">
+        <a href="#">Forgot Password?</a>
+        <a href="signup.html">Create Account</a>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="auth.js"></script>
+</body>
+</html>
+

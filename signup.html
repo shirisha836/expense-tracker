@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Xpenza — Create Account</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="bg">
+
+  <main class="center">
+    <section class="glass-card login-card">
+
+      <!-- LOGO PLACEHOLDER (you can add your logo later) -->
+      <!-- <img src="logo.png" class="auth-logo"> -->
+
+      <div class="brand">
+        <div class="logo-text">✨ Xpenza</div>
+        <div class="subtitle">Create your account</div>
+      </div>
+
+      <form id="signupForm" class="form floating">
+
+        <div class="field">
+          <input id="fullName" type="text" required autocomplete="name">
+          <label for="fullName">Full Name</label>
+        </div>
+
+        <div class="field">
+          <input id="email" type="email" required autocomplete="email">
+          <label for="email">Email</label>
+        </div>
+
+        <div class="field">
+          <input id="password" type="password" required minlength="6" autocomplete="new-password">
+          <label for="password">Password (min 6 chars)</label>
+          <button type="button" class="eye-btn" id="togglePass">Show</button>
+        </div>
+
+        <div class="field">
+          <input id="confirmPassword" type="password" required minlength="6" autocomplete="new-password">
+          <label for="confirmPassword">Confirm Password</label>
+        </div>
+
+        <button type="submit" class="btn primary">Create Account</button>
+
+      </form>
+
+      <div id="signupError" class="error-box"></div>
+
+      <div class="links">
+        <span style="color:var(--muted)">Already have an account?</span>
+        <a href="index.html">Login</a>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- SUCCESS MODAL -->
+  <div id="successModal" class="modal-overlay">
+    <div class="modal-card">
+      <h3 class="modal-title">Account Created 🎉</h3>
+      <p class="modal-text">Redirecting you to login...</p>
+      <button id="goLogin" class="btn primary">Go to Login</button>
+    </div>
+  </div>
+
+  <script src="signup.js"></script>
+</body>
+</html>

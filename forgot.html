@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xpenza — Reset Password</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg">
+
+  <main class="center">
+    <section class="glass-card login-card">
+
+      <div class="brand">
+        <div class="logo-text">✨ Xpenza</div>
+        <div class="subtitle">Reset your password</div>
+      </div>
+
+      <!-- STEP 1 — VERIFY EMAIL -->
+      <form id="verifyForm" class="form floating">
+
+        <div class="field">
+          <input id="verifyEmail" type="email" required>
+          <label for="verifyEmail">Enter your registered email</label>
+        </div>
+
+        <button type="submit" class="btn primary">Verify Email</button>
+
+      </form>
+
+      <!-- STEP 2 — SET NEW PASSWORD (HIDDEN INITIALLY) -->
+      <form id="newPassForm" class="form floating" style="display:none; margin-top:16px;">
+
+        <div class="field">
+          <input id="newPass" type="password" minlength="6" required>
+          <label for="newPass">New password</label>
+        </div>
+
+        <div class="field">
+          <input id="confirmNewPass" type="password" minlength="6" required>
+          <label for="confirmNewPass">Confirm new password</label>
+        </div>
+
+        <button type="submit" class="btn primary">Update Password</button>
+
+      </form>
+
+      <div id="resetError" class="error-box"></div>
+      <div id="resetSuccess" class="success-box"></div>
+
+      <div class="links">
+        <a href="index.html">⬅ Back to Login</a>
+      </div>
+
+    </section>
+  </main>
+
+  <script>
+    const verifyForm = document.getElementById("verifyForm");
+    const newPassForm = document.getElementById("newPassForm");
+    const verifyEmailInput = document.getElementById("verifyEmail");
+    const newPass = document.getElementById("newPass");
+    const confirmNewPass = document.getElementById("confirmNewPass");
+    const errorBox = document.getElementById("resetError");
+    const successBox = document.getElementById("resetSuccess");
+
+    let targetEmail = null;
+
+    /* STEP 1 — VERIFY EMAIL */
+    verifyForm.addEventListener("submit", function(e){
+      e.preventDefault();
+      errorBox.textContent = "";
+      successBox.textContent = "";
+
+      const email = verifyEmailInput.value.trim().toLowerCase();
+      const users = JSON.parse(localStorage.getItem("xpenza_users") || "[]");
+
+      const user = users.find(u => u.email.toLowerCase() === email);
+
+      if (!user) {
+        errorBox.textContent = "Email not found. Try again.";
+        return;
+      }
+
+      // VERIFIED
+      targetEmail = email;
+      successBox.textContent = "Email verified! Enter your new password.";
+      newPassForm.style.display = "block";
+    });
+
+    /* STEP 2 — SET NEW PASSWORD */
+    newPassForm.addEventListener("submit", function(e){
+      e.preventDefault();
+      errorBox.textContent = "";
+      successBox.textContent = "";
+
+      const p1 = newPass.value.trim();
+      const p2 = confirmNewPass.value.trim();
+
+      if (p1.length < 6) {
+        errorBox.textContent = "Password must be at least 6 characters.";
+        return;
+      }
+
+      if (p1 !== p2) {
+        errorBox.textContent = "Passwords do not match.";
+        return;
+      }
+
+      const users = JSON.parse(localStorage.getItem("xpenza_users") || "[]");
+      const index = users.findIndex(u => u.email.toLowerCase() === targetEmail);
+
+      if (index === -1) {
+        errorBox.textContent = "Unexpected error occurred.";
+        return;
+      }
+
+      users[index].password = p1;
+      localStorage.setItem("xpenza_users", JSON.stringify(users));
+
+      successBox.textContent = "Password updated! Redirecting to login...";
+
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 1500);
+    });
+  </script>
+
+</body>
+</html>
+
